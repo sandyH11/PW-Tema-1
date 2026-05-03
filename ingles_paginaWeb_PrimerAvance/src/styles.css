@@ -1,0 +1,195 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos generales */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc;
+}
+
+/* Fondo principal */
+.auth-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #eef2ff, #ffffff);
+}
+
+/* Tarjeta principal */
+.auth-card {
+  width: 380px;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  text-align: center;
+}
+
+/* Título */
+.title {
+  font-size: 26px;
+  margin-bottom: 5px;
+  color: #312e81;
+  font-weight: 700;
+}
+
+.title i {
+  margin-right: 8px;
+  color: #4f46e5;
+}
+
+/* Icono superior */
+.icon-top {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* Círculo del icono */
+.icon-top i {
+  width: 90px;
+  height: 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 38px;
+
+  color: #4f46e5;
+  background: #e0e7ff;
+
+  border-radius: 50%;
+
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+}
+
+/* Texto secundario */
+.subtitle {
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #64748b;
+}
+
+/* Separación de campos */
+.form-group {
+  margin-bottom: 14px;
+}
+
+/* Inputs */
+.form-input {
+  width: 100%;
+  height: 45px;
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  transition: all 0.3s ease;
+}
+
+/* Efecto focus */
+.form-input:focus {
+  outline: none;
+  border-color: #4f46e5;
+
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Contenedor contraseña */
+.password-box {
+  position: relative;
+}
+
+.password-box input {
+  padding-right: 45px;
+}
+
+/* Icono del ojo */
+.eye-icon {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 18px;
+  height: 18px;
+
+  background-image: url('https://cdn-icons-png.flaticon.com/512/159/159604.png');
+
+  background-size: cover;
+  cursor: pointer;
+
+  opacity: 0.6;
+}
+
+.eye-icon:hover {
+  opacity: 1;
+}
+
+/* Botones */
+.btn {
+  width: 100%;
+  height: 45px;
+
+  border: none;
+  border-radius: 10px;
+
+  margin-top: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+/* Botón principal */
+.primary {
+  background: #4f46e5;
+  color: white;
+}
+
+.primary:hover {
+  background: #4338ca;
+}
+
+/* Botón secundario */
+.secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.secondary:hover {
+  background: #d1d5db;
+}
+
+/* Ocultar ojito del navegador */
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
+input[type='password']::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+}

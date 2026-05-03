@@ -1,0 +1,294 @@
+<!-- PANTALLA DE CARGA -->
+<div *ngIf="loading" class="min-h-screen flex items-center justify-center bg-slate-100">
+  <div class="text-center">
+    <!-- Spinner -->
+    <div
+      class="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"
+    ></div>
+
+    <!-- Nombre -->
+    <h2 class="mt-6 text-2xl font-bold text-slate-800">EnglishTrack</h2>
+
+    <!-- Texto -->
+    <p class="text-gray-500 mt-2">Cargando información...</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div *ngIf="!loading" class="min-h-screen bg-slate-100 flex">
+  <!-- SIDEBAR -->
+  <aside class="w-72 bg-slate-950 text-white p-6 flex flex-col justify-between">
+    <div>
+      <!-- Logo -->
+      <h1
+        class="text-3xl font-bold text-indigo-400 mb-10 cursor-pointer"
+        (click)="cambiarSeccion('inicio')"
+      >
+        EnglishTrack
+      </h1>
+
+      <!-- Menú -->
+      <nav class="space-y-4">
+        <!-- Inicio -->
+        <button
+          (click)="cambiarSeccion('inicio')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'inicio',
+            'hover:bg-slate-800': seccion !== 'inicio',
+          }"
+        >
+          Inicio
+        </button>
+
+        <!-- Alumnos -->
+        <button
+          (click)="cambiarSeccion('alumnos')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'alumnos',
+            'hover:bg-slate-800': seccion !== 'alumnos',
+          }"
+        >
+          Alumnos
+        </button>
+
+        <!-- Módulos -->
+        <button
+          (click)="cambiarSeccion('modulos')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'modulos',
+            'hover:bg-slate-800': seccion !== 'modulos',
+          }"
+        >
+          Módulos
+        </button>
+
+        <!-- Examen -->
+        <button
+          (click)="cambiarSeccion('examen')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'examen',
+            'hover:bg-slate-800': seccion !== 'examen',
+          }"
+        >
+          Examen Final
+        </button>
+
+        <!-- Resultados -->
+        <button
+          (click)="cambiarSeccion('resultados')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'resultados',
+            'hover:bg-slate-800': seccion !== 'resultados',
+          }"
+        >
+          Resultados
+        </button>
+      </nav>
+    </div>
+
+    <!-- Logout -->
+    <button
+      (click)="logout()"
+      class="w-full bg-red-500 hover:bg-red-600 py-3 rounded-xl transition"
+    >
+      Cerrar Sesión
+    </button>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <main class="flex-1 p-10">
+    <!-- Barra superior -->
+    <div class="flex justify-between items-center mb-10">
+      <div>
+        <h1 class="text-4xl font-bold text-slate-800">Dashboard Docente</h1>
+
+        <p class="text-gray-600 mt-2">Panel de administración académica.</p>
+      </div>
+
+      <!-- Usuario -->
+      <div
+        (click)="cambiarSeccion('inicio')"
+        class="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl shadow-sm cursor-pointer hover:scale-105 transition"
+      >
+        <!-- Inicial -->
+        <div
+          class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg"
+        >
+          {{ nombreUsuario ? nombreUsuario.charAt(0) : 'U' }}
+        </div>
+
+        <!-- Nombre -->
+        <div>
+          <p class="font-semibold text-slate-800">
+            {{ nombreUsuario }}
+          </p>
+
+          <p class="text-sm text-gray-500">Docente</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INICIO -->
+    <div *ngIf="seccion === 'inicio'">
+      <!-- Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <!-- Total alumnos -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 class="text-gray-500">Total Alumnos</h2>
+
+          <p class="text-4xl font-bold text-indigo-600 mt-4">
+            {{ totalAlumnos }}
+          </p>
+        </div>
+
+        <!-- Módulos -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 class="text-gray-500">Módulos Activos</h2>
+
+          <p class="text-4xl font-bold text-indigo-600 mt-4">10</p>
+        </div>
+
+        <!-- Exámenes -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 class="text-gray-500">Exámenes</h2>
+
+          <p class="text-4xl font-bold text-indigo-600 mt-4">0</p>
+        </div>
+
+        <!-- Promedio -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 class="text-gray-500">Promedio General</h2>
+
+          <p class="text-4xl font-bold text-indigo-600 mt-4">0</p>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="bg-white rounded-2xl shadow-sm mt-10 p-6">
+        <h2 class="text-2xl font-bold text-slate-800 mb-6">Alumnos Registrados</h2>
+
+        <table class="w-full">
+          <thead>
+            <tr class="border-b text-left text-gray-500">
+              <th class="py-3">Nombre</th>
+              <th>Email</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- Mostrar alumnos -->
+            <tr *ngFor="let alumno of alumnos" class="border-b">
+              <td class="py-4">
+                {{ alumno.nombre }}
+                {{ alumno.apellido }}
+              </td>
+
+              <td>
+                {{ alumno.email }}
+              </td>
+
+              <td class="text-green-600 font-semibold">Activo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ALUMNOS -->
+    <div *ngIf="seccion === 'alumnos'">
+      <!-- Encabezado -->
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h2 class="text-3xl font-bold text-slate-800">Gestión de Alumnos</h2>
+
+          <p class="text-gray-500 mt-2">{{ alumnos.length }} alumnos registrados</p>
+        </div>
+
+        <!-- Buscador -->
+        <input
+          type="text"
+          [(ngModel)]="busqueda"
+          (input)="buscarAlumno()"
+          placeholder="Buscar alumno..."
+          class="bg-white px-5 py-3 rounded-xl shadow-sm outline-none w-80"
+        />
+      </div>
+
+      <!-- Tabla -->
+      <div class="bg-white rounded-2xl shadow-sm p-6 overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b text-left text-gray-500">
+              <th class="py-4">Nombre</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- Lista -->
+            <tr
+              *ngFor="let alumno of alumnosFiltrados"
+              class="border-b hover:bg-slate-50 transition"
+            >
+              <td class="py-4 font-medium">
+                {{ alumno.nombre }}
+                {{ alumno.apellido }}
+              </td>
+
+              <td>
+                {{ alumno.email }}
+              </td>
+
+              <td>
+                <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm">
+                  {{ alumno.rol }}
+                </span>
+              </td>
+
+              <td>
+                <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">
+                  Activo
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODULOS -->
+    <div *ngIf="seccion === 'modulos'">
+      <div class="bg-white rounded-2xl p-8 shadow-sm">
+        <h2 class="text-3xl font-bold text-slate-800 mb-4">Gestión de Módulos</h2>
+
+        <p class="text-gray-600">Aquí podrás administrar los módulos de inglés.</p>
+      </div>
+    </div>
+
+    <!-- EXAMEN -->
+    <div *ngIf="seccion === 'examen'">
+      <div class="bg-white rounded-2xl p-8 shadow-sm">
+        <h2 class="text-3xl font-bold text-slate-800 mb-4">Examen Final</h2>
+
+        <p class="text-gray-600">Gestión del examen integral de inglés.</p>
+      </div>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div *ngIf="seccion === 'resultados'">
+      <div class="bg-white rounded-2xl p-8 shadow-sm">
+        <h2 class="text-3xl font-bold text-slate-800 mb-4">Resultados Académicos</h2>
+
+        <p class="text-gray-600">Visualización de resultados y estadísticas.</p>
+      </div>
+    </div>
+  </main>
+</div>

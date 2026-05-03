@@ -1,0 +1,46 @@
+<!-- Página login -->
+<div class="auth-page">
+  <!-- Tarjeta -->
+  <div class="auth-card">
+    <!-- Logo -->
+    <div class="text-center mb-6 cursor-pointer" (click)="goHome()">
+      <!-- Icono -->
+      <div class="icon-top">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+
+      <!-- Nombre -->
+      <h1 class="title">EnglishTrack</h1>
+
+      <!-- Texto -->
+      <p class="subtitle">Plataforma de gestión académica</p>
+    </div>
+
+    <!-- Texto login -->
+    <p class="subtitle">Inicia sesión para continuar</p>
+
+    <!-- Correo -->
+    <div class="form-group">
+      <input type="email" [(ngModel)]="email" placeholder="Correo electrónico" class="form-input" />
+    </div>
+
+    <!-- Contraseña -->
+    <div class="form-group password-box">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password"
+        placeholder="Contraseña"
+        class="form-input"
+      />
+
+      <!-- Ojito -->
+      <span class="eye-icon" (click)="togglePassword()"> </span>
+    </div>
+
+    <!-- Botón login -->
+    <button class="btn primary" (click)="login()">Iniciar Sesión</button>
+
+    <!-- Registro -->
+    <button class="btn secondary" (click)="goToRegister()">Crear Cuenta</button>
+  </div>
+</div>

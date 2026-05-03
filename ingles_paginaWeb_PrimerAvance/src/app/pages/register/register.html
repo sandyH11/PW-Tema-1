@@ -1,0 +1,62 @@
+<!-- Página registro -->
+<div class="auth-page">
+  <!-- Tarjeta -->
+  <div class="auth-card">
+    <!-- Icono -->
+    <div class="icon-top">
+      <i class="fa-solid fa-user-plus"></i>
+    </div>
+
+    <!-- Título -->
+    <h1 class="title">Crear Cuenta</h1>
+
+    <p class="subtitle">Registra un nuevo alumno</p>
+
+    <!-- Nombre -->
+    <div class="form-group">
+      <input type="text" [(ngModel)]="nombre" placeholder="Nombre" class="form-input" />
+    </div>
+
+    <!-- Apellido -->
+    <div class="form-group">
+      <input type="text" [(ngModel)]="apellido" placeholder="Apellido" class="form-input" />
+    </div>
+
+    <!-- Correo -->
+    <div class="form-group">
+      <input type="email" [(ngModel)]="email" placeholder="Correo electrónico" class="form-input" />
+    </div>
+
+    <!-- Contraseña -->
+    <div class="form-group password-box">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password"
+        placeholder="Contraseña"
+        class="form-input"
+      />
+
+      <!-- Ojito -->
+      <span class="eye-icon" (click)="togglePassword()"> </span>
+    </div>
+
+    <!-- Confirmar contraseña -->
+    <div class="form-group password-box">
+      <input
+        [type]="showConfirmPassword ? 'text' : 'password'"
+        [(ngModel)]="confirmPassword"
+        placeholder="Confirmar contraseña"
+        class="form-input"
+      />
+
+      <!-- Ojito -->
+      <span class="eye-icon" (click)="toggleConfirmPassword()"> </span>
+    </div>
+
+    <!-- Botón registro -->
+    <button class="btn primary" (click)="register()">Registrarse</button>
+
+    <!-- Cancelar -->
+    <button class="btn secondary" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>

@@ -1,0 +1,275 @@
+<!-- PANTALLA DE CARGA -->
+<div *ngIf="loading" class="min-h-screen flex items-center justify-center bg-slate-100">
+  <div class="text-center">
+    <!-- Spinner -->
+    <div
+      class="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"
+    ></div>
+
+    <h2 class="mt-6 text-2xl font-bold text-slate-800">EnglishTrack</h2>
+
+    <p class="text-gray-500 mt-2">Cargando información...</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div *ngIf="!loading" class="min-h-screen bg-slate-100 flex">
+  <!-- SIDEBAR -->
+  <aside class="w-72 bg-slate-950 text-white p-6 flex flex-col justify-between">
+    <div>
+      <!-- LOGO -->
+      <h1
+        class="text-3xl font-bold text-indigo-400 mb-10 cursor-pointer"
+        (click)="cambiarSeccion('inicio')"
+      >
+        EnglishTrack
+      </h1>
+
+      <!-- MENU -->
+      <nav class="space-y-4">
+        <!-- Inicio -->
+        <button
+          (click)="cambiarSeccion('inicio')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'inicio',
+            'hover:bg-slate-800': seccion !== 'inicio',
+          }"
+        >
+          Inicio
+        </button>
+
+        <!-- Examen -->
+        <button
+          (click)="cambiarSeccion('examen')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'examen',
+            'hover:bg-slate-800': seccion !== 'examen',
+          }"
+        >
+          Examen Final
+        </button>
+
+        <!-- Resultados -->
+        <button
+          (click)="cambiarSeccion('resultados')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'resultados',
+            'hover:bg-slate-800': seccion !== 'resultados',
+          }"
+        >
+          Resultados
+        </button>
+
+        <!-- Perfil -->
+        <button
+          (click)="cambiarSeccion('perfil')"
+          class="w-full text-left px-4 py-3 rounded-xl transition"
+          [ngClass]="{
+            'bg-indigo-600': seccion === 'perfil',
+            'hover:bg-slate-800': seccion !== 'perfil',
+          }"
+        >
+          Perfil
+        </button>
+      </nav>
+    </div>
+
+    <!-- Logout -->
+    <button
+      (click)="logout()"
+      class="w-full bg-red-500 hover:bg-red-600 py-3 rounded-xl transition"
+    >
+      Cerrar Sesión
+    </button>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <main class="flex-1 p-10">
+    <!-- SUPERIOR -->
+    <div class="flex justify-between items-center mb-10">
+      <div>
+        <h1 class="text-4xl font-bold text-slate-800">Dashboard Alumno</h1>
+
+        <p class="text-gray-600 mt-2">Sistema de evaluación de inglés.</p>
+      </div>
+
+      <!-- Usuario -->
+      <div
+        (click)="cambiarSeccion('inicio')"
+        class="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl shadow-sm cursor-pointer hover:scale-105 transition"
+      >
+        <!-- Inicial -->
+        <div
+          class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg"
+        >
+          {{ nombreUsuario ? nombreUsuario.charAt(0) : 'U' }}
+        </div>
+
+        <!-- Nombre -->
+        <div>
+          <p class="font-semibold text-slate-800">
+            {{ nombreUsuario }}
+          </p>
+
+          <p class="text-sm text-gray-500">Alumno</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INICIO -->
+    <div *ngIf="seccion === 'inicio'">
+      <!-- BIENVENIDA -->
+      <div class="bg-white rounded-2xl p-8 shadow-sm mb-8">
+        <h2 class="text-3xl font-bold text-slate-800">Bienvenido a EnglishTrack</h2>
+
+        <p class="text-gray-600 mt-4 leading-7">
+          Esta plataforma permite presentar una evaluación integral del idioma inglés mediante las
+          habilidades: Writing, Listening, Reading y Speaking.
+        </p>
+      </div>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <!-- Estado -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 class="text-gray-500">Estado del Examen</h2>
+
+          <p class="text-3xl font-bold text-yellow-500 mt-4">Pendiente</p>
+        </div>
+
+        <!-- Nivel -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 class="text-gray-500">Nivel Detectado</h2>
+
+          <p class="text-2xl font-bold text-yellow-500 mt-4">Pendiente</p>
+        </div>
+
+        <!-- Habilidades -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 class="text-gray-500">Habilidades</h2>
+
+          <p class="text-xl font-bold text-indigo-600 mt-4">4 Habilidades</p>
+        </div>
+
+        <!-- Resultado -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm">
+          <h2 class="text-gray-500">Resultado</h2>
+
+          <p class="text-3xl font-bold text-gray-400 mt-4">---</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXAMEN -->
+    <div *ngIf="seccion === 'examen'">
+      <div class="bg-white rounded-2xl shadow-sm p-8">
+        <h2 class="text-3xl font-bold text-slate-800 mb-8">Examen Integral</h2>
+
+        <!-- HABILIDADES -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Writing -->
+          <div class="bg-slate-50 border rounded-2xl p-6 hover:shadow-lg transition cursor-pointer">
+            <h3 class="text-2xl font-bold text-slate-800">Writing</h3>
+
+            <p class="text-gray-500 mt-3">Evaluación de escritura en inglés.</p>
+
+            <!-- Botón -->
+            <button
+              class="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl transition"
+            >
+              Ingresar
+            </button>
+          </div>
+
+          <!-- Listening -->
+          <div class="bg-slate-50 border rounded-2xl p-6 hover:shadow-lg transition cursor-pointer">
+            <h3 class="text-2xl font-bold text-slate-800">Listening</h3>
+
+            <p class="text-gray-500 mt-3">Evaluación de comprensión auditiva.</p>
+
+            <!-- Botón -->
+            <button
+              class="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl transition"
+            >
+              Ingresar
+            </button>
+          </div>
+
+          <!-- Reading -->
+          <div class="bg-slate-50 border rounded-2xl p-6 hover:shadow-lg transition cursor-pointer">
+            <h3 class="text-2xl font-bold text-slate-800">Reading</h3>
+
+            <p class="text-gray-500 mt-3">Evaluación de comprensión lectora.</p>
+
+            <!-- Botón -->
+            <button
+              class="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl transition"
+            >
+              Ingresar
+            </button>
+          </div>
+
+          <!-- Speaking -->
+          <div class="bg-slate-50 border rounded-2xl p-6 hover:shadow-lg transition cursor-pointer">
+            <h3 class="text-2xl font-bold text-slate-800">Speaking</h3>
+
+            <p class="text-gray-500 mt-3">Evaluación de pronunciación y conversación.</p>
+
+            <!-- Botón -->
+            <button
+              class="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl transition"
+            >
+              Ingresar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div *ngIf="seccion === 'resultados'">
+      <div class="bg-white rounded-2xl shadow-sm p-8">
+        <h2 class="text-3xl font-bold text-slate-800 mb-4">Resultados</h2>
+
+        <p class="text-gray-600">
+          Los resultados del examen aparecerán aquí después de completar la evaluación.
+        </p>
+      </div>
+    </div>
+
+    <!-- PERFIL -->
+    <div *ngIf="seccion === 'perfil'">
+      <div class="bg-white rounded-2xl shadow-sm p-8">
+        <h2 class="text-3xl font-bold text-slate-800 mb-8">Perfil del Alumno</h2>
+
+        <div class="space-y-6">
+          <!-- Nombre -->
+          <div>
+            <p class="text-gray-500">Nombre</p>
+
+            <p class="text-xl font-semibold text-slate-800 mt-1">
+              {{ nombreUsuario }}
+            </p>
+          </div>
+
+          <!-- Rol -->
+          <div>
+            <p class="text-gray-500">Rol</p>
+
+            <p class="text-xl font-semibold text-slate-800 mt-1">Alumno</p>
+          </div>
+
+          <!-- Plataforma -->
+          <div>
+            <p class="text-gray-500">Plataforma</p>
+
+            <p class="text-xl font-semibold text-slate-800 mt-1">EnglishTrack</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
